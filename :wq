@@ -1,0 +1,92 @@
+docker 
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Your branch is up to date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   "Docker/\345\270\270\347\224\250\345\221\275\344\273\244.md"
+#	new file:   "Docker/\350\270\251\345\235\221.md"
+#	modified:   SUMMARY.md
+#
+# ------------------------ >8 ------------------------
+# Do not modify or remove the line above.
+# Everything below it will be ignored.
+diff --git "a/Docker/\345\270\270\347\224\250\345\221\275\344\273\244.md" "b/Docker/\345\270\270\347\224\250\345\221\275\344\273\244.md"
+index da279b6..b89bd86 100644
+--- "a/Docker/\345\270\270\347\224\250\345\221\275\344\273\244.md"
++++ "b/Docker/\345\270\270\347\224\250\345\221\275\344\273\244.md"
+@@ -4,7 +4,7 @@
+    ```bash
+    docker kill $(docker ps -a -q)
+    ```
+-2. 删除所有已经停止的窗口
++2. 删除所有已经停止的容器
+    ```bash
+    docker rm $(docker ps -a -q)
+    ```
+@@ -54,7 +54,19 @@
+    ```bash
+    docker pull name:tag
+    ```
+-14.获取窗口的端口的映射配置
++14. 获取窗口的端口的映射配置
+    ```bash
+    docker port CONTAINER ID或者NAMES
+    ``` 
++15. 要是dockerfile运行过程中出错，会在images中生成<none>的无用镜像，删除方法来自百度粘贴
++   ```bash
++   # 删除命令：
++   docker rmi $(docker images | grep "none" | awk '{print $3}')
++   # 上一步报错还有未停掉的容器后可进行下面的步骤
++   # 停止容器
++   docker stop $(docker ps -a | grep "Exited" | awk '{print $1 }') 
++   # 删除：
++   docker rm $(docker ps -a | grep "Exited" | awk '{print $1 }')
++   # 删除镜像
++   docker rmi $(docker images | grep "none" | awk '{print $3}')
++   ```    
+diff --git "a/Docker/\350\270\251\345\235\221.md" "b/Docker/\350\270\251\345\235\221.md"
+new file mode 100644
+index 0000000..264d186
+--- /dev/null
++++ "b/Docker/\350\270\251\345\235\221.md"
+@@ -0,0 +1,24 @@
++# 踩坑
++
++### Docker端口映射成功，但仍无法访问
++```bash
++CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
++69864b4bcb82        gotest              "/bin/sh -c /gotest-…"   7 minutes ago       Up 7 minutes        0.0.0.0:8088->8088/tcp   stoic_varahamihira
++```
++
++#### 无法访问原因
++docker里面的host不能配置127.0.0.1 或者192.168.0.1 否则宿主机器将无法访问端口
++
++##### go代码错误示例：
++```Golang
++http.HandleFunc("/", IndexHandler)
++http.ListenAndServe("127.0.0.1:8088", nil)
++```
++
++127.0.0.1或者192.168.0.1都表示服务监听了具体的IP，0.0.0.0则是监听所有IP
++
++##### go代码正确示例：
++```Golang
++http.HandleFunc("/", IndexHandler)
++http.ListenAndServe("0.0.0.0:8088", nil)
++```
+\ No newline at end of file
+diff --git a/SUMMARY.md b/SUMMARY.md
+index 4b85281..4a7e382 100644
+--- a/SUMMARY.md
++++ b/SUMMARY.md
+@@ -24,6 +24,7 @@
+     * [Namespace-IPC](Docker/Namespace-IPC.md)
+     * [Namespace-Network](Docker/Namespace-Network.md)
+     * [Namespace-User](Docker/Namespace-User.md)
++    * [踩坑](Docker/踩坑.md)
+ * [DevOps](DevOps.md)
+     * [ChatOps](DevOps/ChatOps.md)
+     * [GitOps](DevOps/GitOps.md)
