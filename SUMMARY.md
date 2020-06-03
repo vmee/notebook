@@ -2,8 +2,11 @@
 
 * [Introduction](README.md)
 * [Go](GO.md)
+    * [入门](Go/入门.md)
     * [并发](Go/并发.md)
     * [性能剖析PProf](Go/PProf.md)
+    * [第三方库](Go/第三方库.md)
+    * [学习资料](Go/学习资料.md)
 * [Kubernetes](Kubernetes/搭建.md)
     * [搭建](Kubernetes/搭建.md)
     * [本质](Kubernetes/本质.md)
@@ -37,4 +40,6 @@
 * [分布式](分布式.md)
     * [CAP理论](分布式/CAP.md)
     * [BASE理论](分布式/BASE.md)
+* [Linux](Linux.md)
+    * [常用命令](Linux/常用命令.md)
 
