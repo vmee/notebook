@@ -46,4 +46,12 @@ Docker是LXC的二次发行版
 
 ## Docker Images
 - 分层构建机制 最底层bootfs 其之是rootfs
-- 
+
+
+
+## 资源对象
+- image
+- containers
+- networks
+- volumes
+- plugins
