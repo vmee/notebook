@@ -56,3 +56,11 @@ Docker是LXC的二次发行版
 - networks
 - volumes
 - plugins
+
+
+## OOME (out of memory exception)
+
+## Limit a container's access to memory 
+-m --memory
+--memory-swap
+--momory-swappiness

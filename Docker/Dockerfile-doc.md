@@ -75,10 +75,22 @@ ENTRYPOINT command param1 param2
 一个Dockerfile中只能有一个ENTRYPOINT，如果有多个，则最后一个生效
 
 ### RUN
-```Dockerfile
-RUN <command> 或者 RUN ["executable", "param1", "param2"] 
-```
+
+用于指定docker build过程中运行的程序，其中可以是任何命令
 每条RUN指令将在当前镜像基础上执行指定命令，并提交为新的镜像。
+
+```Dockerfile
+RUN <command> 或者
+RUN ["executable", "param1", "param2"] 
+```
+
+第一种格式中，command通常为一个shell命令，且以“/bin/sh -c”来运行它，这意味着此进程在容器中的PID不为1，不能接受Unix信号，因此，当使docker stop container命令停止容器时，此进程接收不到SIGTERM信号;
+第二种语法格式中的参数是一个JSON格式的数组，其中executable为要运行的命令，后面的为参数，然而此格式指定的命令不会以“/bin/sh -c"来发起，因此常见的shell操作如变量替换及通配符替换将不会进行;不过，如果要运行的依赖shell特性的话，可以将其替换为类似下面的格式
+
+JSON数组中要使用双引号
+
+> RUN ["/bin/bash", "-c" "executable", "param1", "param2"]
+
 
 > RUM COMMAND 1 && \
 > COMMAND 2 && COMMAND 3
@@ -165,3 +177,30 @@ ONBUILD ADD app.js /test/app.js
  RUN mkdir test
  ADD app.js /test/app.js
 ```
+
+### HEALTHCHECK
+检查主进程的工作状态健康与否
+
+--interval 
+--timeout
+--start-period 等待时间
+--retries 检查次数
+
+状态
+- 0 success
+- 1 unhealth
+- 2 reserved
+
+example:
+HEALTHCHECK --interval==5m --timeout=3s \
+    CMD curl -f http://localhost/ || exit 1
+
+
+### SHELL
+运行程序，默认运行的shell程序
+
+### STOPSIGNAL
+设置退出信号
+
+### ARG
+只在build中使用，在执行build时，进行传参
