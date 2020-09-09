@@ -4,5 +4,8 @@
 
 ## 种子站
 
-[https://thepiratebay.org/index.html](https://thepiratebay.org/index.html) [https://www.skytorrents.lol/](https://www.skytorrents.lol/) [http://rarbgprx.org/torrents.php](http://rarbgprx.org/torrents.php) [https://torrentz.io/](https://torrentz.io/)
+- [https://thepiratebay.org/index.html](https://thepiratebay.org/index.html) 
+- [https://www.skytorrents.lol/](https://www.skytorrents.lol/) 
+- [http://rarbgprx.org/torrents.php](http://rarbgprx.org/torrents.php)
+- [https://torrentz.io/](https://torrentz.io/)
 

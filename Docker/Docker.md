@@ -64,3 +64,10 @@ Docker是LXC的二次发行版
 -m --memory
 --memory-swap
 --momory-swappiness
+
+## CPU Limit
+--cpu-share 按比例占用， 空闲的不分配
+--cpus 限制数量
+--cpuset-cpus 限制用在哪个cpu
+--cpu-peroid
+--cpu-quota

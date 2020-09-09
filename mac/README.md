@@ -7,7 +7,7 @@
 * 支持微信与企业微信
 * 多种模式
 * 消息免撤回
-* 免认证登陆 （最实用功能，不用再拿出手机点南确认了）
+* 免认证登录 （最实用功能，不用再拿出手机点南确认了）
 * 多开与兼容小程
 
 [小助手](https://github.com/MustangYM/WeChatExtension-ForMac) [安装工具](https://github.com/lmk123/oh-my-wechat) [企业微信支持](https://github.com/MustangYM/WeChatICU-ForMac)
