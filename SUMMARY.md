@@ -111,6 +111,6 @@
     * [手机拍照](mix/take-photo-via-phone.md)
     * [markdown画图](mix/markdown-mermaid.md)
 * [Aphorism](aphorism.md)
-* [互联网][web/web.md]
+* [互联网](web/web.md)
     * [DNS](web/dns.md)
 
