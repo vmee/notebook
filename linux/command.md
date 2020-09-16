@@ -303,6 +303,17 @@ options
 
 
 
+### tr命令
+tr [OPTION]... SET1 [SET2]
+把输入的数据当中的字符，凡是在SET1定义范围内出现的，通通对位转换为SET2出现的字符
 
+用法
+- tr SET1 SET2 < path/file
+- tr -d SET1 < path/file
 
+> 注意不修改源文件
 
+### tee命令
+read from standard input and write to standard output and files
+从标准输入里读取数据，写到标准输出或文件
+> COMMAND | tee /PATH/TO/file

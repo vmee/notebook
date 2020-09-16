@@ -128,3 +128,58 @@ bash通过状态返回值来输出此结果
 - 输出的数据流： --> 标准输出 （stdout） 显示器
 - 错误输出流： --> 错误输出(stderr) 显示器
   
+fd: file descriptor, 文件描述符
+- 标准输入： 0
+- 标准输出： 1
+- 错误输出： 2
+
+IO重定向
+
+输出重定向: > --覆盖输出 
+输出重定向: >> -- 追加输出
+
+> set -C 禁止覆盖输出到已存在的文件 可以使用强制覆盖：>|
+> set +c 关闭上述特性
+> 仅对当前shell有效
+
+错误输出流重定向：2> 2>>
+
+合并正确输出流和错误输出流：
+- &>, &>>
+- COMMOND > /path/to/file 2>&1
+- COMMOND >> /path/to/file 2>&1
+
+输入重定向： <
+HERE DOCUMENT: <<
+```sh
+
+cat <<EOF
+> how are you?
+> doing
+> EOF
+
+```
+
+### tr命令
+tr [OPTION]... SET1 [SET2]
+把输入的数据当中的字符，凡是在SET1定义范围内出现的，通通对位转换为SET2出现的字符
+
+用法
+- tr SET1 SET2 < path/file
+- tr -d SET1 < path/file
+
+> 注意不修改源文件
+
+### 管道
+连接程序，实现将前一个命令的输出直接定向后一个程序当作输入
+> COMMAD | COMMAD | COMMAD 
+
+
+### tee命令
+read from standard input and write to standard output and files
+从标准输入里读取数据，写到标准输出或文件
+> COMMAND | tee /PATH/TO/file
+
+
+### 特殊设备 /dev/null
+数据黑洞
