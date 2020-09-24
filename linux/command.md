@@ -317,3 +317,5 @@ tr [OPTION]... SET1 [SET2]
 read from standard input and write to standard output and files
 从标准输入里读取数据，写到标准输出或文件
 > COMMAND | tee /PATH/TO/file
+
+

@@ -231,6 +231,89 @@ switch user 切换用户
 
 
 
+## 权限管理
+
+进程安全上下文
+
+进程对文件的访问权限应用模型
+- 进程的属主与文件的属主是否相同，如果相同，则应用属主权限
+- 否则，则检查进程的属主是否属于文件的属组，如果是，则应用属组权限
+- 否则，就只能应用other的权限
+
+权限
+- r read
+- w write
+- x excute
+
+文件
+- r 可读取文件的数据
+- w 可修改的文件的数据
+- x 可将此文件运行为进程 
+
+目录
+- r 可使用ls命令获取其下的所有文件列表
+- w 可修改此目录下的文件列表，即创建或删除文件
+- x 可cd到此目录中，且可使用ls -l 获取所有文件详细属性信息
+
+mode:rwxrwxrwx  
+ownership: user,group  
+
+权限组合机制
+- --- 000 0
+- --x 001 1
+- -w- 010 2
+- -wx 011 3
+- r-- 100 4
+- r-x 101 5
+- rw- 110 6
+- rwx 111 7
+
+权限管理命令
+### chmod
+三类用户
+- u 属主
+- g 属组
+- o 其他
+- a 所有
+mode表示法
+- 赋权表示法 u=/g= ...
+- 授权表示法 u+/u- g+/g- ...
+- 8进制表示法 777 755 644 ...
+
+options
+- --reference 引用性修改 --reference 引用文件  复用其他文件权限
+- -R --recusive 递归修改
+
+### chown
+更改属主与属组
+
+- -R 递归修改 
+- - --reference 引用性修改 --reference 引用文件 复用其他文件属主与组
+  
+### chgrp
+- -R 递归修改 
+- - --reference 引用性修改 --reference 引用文件 复用其他文件属主与组
 
 
+> 注意 仅管理员可以修改属主与属组
 
+
+### install
+install - copy files and set attributes
+- install [OPTION]... [-T] SOURCE DEST
+- install [OPTION]... SOURCE... DIRECTORY
+- install [OPTION]... -t DIRECTORY SOURCE...
+- install [OPTION]... -d DIRECTORY...
+
+常用选项
+- -m --mode=mode 设定文件权限，默认755
+- -o --owner=OWNER 设定属主
+- -g --group=GROUP 设定属组
+- -d 创建目录
+
+
+### mktemp
+
+ mktemp - create a temporary file or directory
+
+ 

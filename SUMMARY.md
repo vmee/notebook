@@ -77,6 +77,7 @@
     * [开源协定](linux/license.md)
     * [基础知识](linux/base.md)
     * [bash](linux/bash.md)
+    * [shell](linux/shell.md)
     * [用户、组和权限](linux/user-group-permission.md)
 * [数据库](datebase/数据库.md)
     * [Redis](datebase/Redis.md)

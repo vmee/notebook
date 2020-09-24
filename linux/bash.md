@@ -79,6 +79,9 @@ bash通过状态返回值来输出此结果
 
 ## 变量
 变量是命名的内存空间
+### 变量命名
+变量名只能包含数字字母下划线，不能以字母开头
+变量名：见名知义，命名机制遵循某种法则
 
 ### 变量类型
 - 整型
@@ -99,6 +102,60 @@ bash通过状态返回值来输出此结果
 - int 16： 10000， 0001 0000 
 - string 16: 16bit
 
+弱类型变量
+> bash把所有变量统统视作字符型
+> bash中的变量无需事先声明
+
+
+变量替换：把变量名出现的位置替换为其所指向的内存空间中的数据
+变量引用：${var_name} $var_name
+
+### 变量作用域
+- 本地变量：作用域仅为当前shell进程
+- 环境变量 作用域仅当前shell进程及其子进程
+- 局部变量 作用域仅某段代码片段或函数上下文
+
+位置参数变量
+特殊变量：shell内置的有特殊功用的变量
+
+### 本地变量
+- 变量赋值 name=value
+- 变量引用 ${name}, $name
+  - "": 变量名会替换为其值 
+  - '': 变量名不会替换为其值
+- 查看变量 set
+- 撤销变量： unset var_name 注意此处非变量引用
+
+### 环境变量
+变量赋值 
+- export  name=value
+- name = value; export name
+- declare -x name=value
+- name=value; declare -x name
+变量引用 ${name} $name
+
+> 注意 bash内嵌了许多环境变量（通常为全大与字符），用于定义bash的工作环境
+
+查看环境变量命令：set、printenv、declare -x、env
+撤销环境变量：unset name
+
+### 只读变量
+- declare -r name
+- readonly name
+
+> 只读变量无法重新赋值 ，并且不支持撤销; 存活时间为当前shell进程的生命周期，随shell进程终止而终止
+
+
+
+### 程序：指令+数据
+- 指令 运行的程序
+- 数据 IO设备、文件、管道、变量
+
+
+### 程序：算法+数据结构
+
+### set命令
+查看定义过的变量
 
 ## globbing 文件名通配
 匹配模式之元字符
@@ -183,3 +240,97 @@ read from standard input and write to standard output and files
 
 ### 特殊设备 /dev/null
 数据黑洞
+
+## 命令hash
+
+Determine and remember the full pathname of each command NAME.  If
+    no arguments are given, information about remembered commands is displayed.
+
+确定和记住每命令的完整的路径，
+
+缓存此前的命令的查找结果：key-value
+- key 搜索键
+- value: 值
+
+hash命令
+- hash列出 
+- hash -D COMMAND 删除
+- hash -r 清空
+
+
+## bash多命令执行
+```sh
+COMMAND1;COMMAND2;COMMAND3;...
+```
+
+## 逻辑运算
+运算数：
+- 真（true, yes, on, 1）
+- 假（false,no ,off, 0）
+
+与：&&
+或：||
+非：！
+异域：
+
+短路法则
+```sh
+$ command1 && command2 //1为假2则不会执行 1为真2必须执行
+```
+```sh
+$ command1 || command2 //1为假2则执行 1为真2则不会执行
+```
+
+## 配置文件
+配置文件分两类
+- profile类 为交互式登录shell提供配置
+- bashrc类 为非交互式登录的shell进程提供配置
+
+交互式登录shell进程
+
+直接通过某终端输入账号和密码后登陆打开的shell进程
+使用su命令 su - USERNAME 或者使用 su -l USERNAME执行的登录切换
+
+非交互式登录shell进程
+
+su USERNAME 执行的登录切换
+图形界面下打开的终端
+运行脚本 
+
+### profile类
+- 全局：对所有用户都生效
+  - /etc/profile
+  - /etc/profile.d/*.sh
+- 用户个人：仅对当前用户有效
+  - ～/bash_profile
+
+功能
+- 用于定义环境变量
+- 运行命令或脚本
+
+### baserc类
+- 全局
+  - /etc/bashrc
+- 用户个人
+  - ～/.bashrc
+
+功用
+- 定义本地变量
+- 定义命令别名
+
+> 仅管理员可修改全局配置文件
+
+交互式登录shell进程
+/etc/profile -> etc/profile.d/* -> bash_profile -> ~/.bashrc -> /etc/bashrc
+
+非交互式登录的shell进程
+～/.bashrc -> /etc/bashrc -> /etc/profile.d/*
+
+命令行中定义的特性，例如变量和别名作用域为当前shell进程的生命周期;
+配置文件定义的我，只能随后新启动的shell进程有效
+
+让通过配置文件定义的文件立即生效
+- 通过命令行重复定义一次
+- 让shell进程重读配置文件
+  - source /PATH/CONF
+  - . /PATH/CONF
