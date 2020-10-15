@@ -334,3 +334,37 @@ su USERNAME 执行的登录切换
 - 让shell进程重读配置文件
   - source /PATH/CONF
   - . /PATH/CONF
+
+
+## 算术运算
+
+算术运行格式
+1. let var=算术运算表达式
+2. var = $[算术运算表达式]
+3. var = $((算术运算表达式))
+4. var = $(expr $arg1 $op $arg2)
+
+> 注意：乘法符号在有些场景下需要使用转义符
+
+- +
+- -
+- *
+- /
+
+
+## bash脚本编程之用户交互
+脚本参数
+
+用户交互:通过键盘输入,赋值给变量
+
+- echo -n "Enter a name"; read name
+- read -p "Enter a name" name
+- read -t 5 -p "Enter a name" name #等5s
+  
+
+检查脚本中的语法错误
+bash -n script.sh 
+
+调试执行
+bash -x script.sh
+

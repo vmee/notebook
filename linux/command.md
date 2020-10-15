@@ -319,3 +319,201 @@ read from standard input and write to standard output and files
 > COMMAND | tee /PATH/TO/file
 
 
+### scp命令
+
+### rsync命令
+
+
+## 文本处理工具
+Linux文本处理三剑客
+- grep 文本过滤工具（模式：pattern）工具
+  - grep 基本正则表达式
+  - egreg 扩展正式表达式
+  - fgreg 
+- sed stream editor 流编辑器，文本编辑工具
+- awk Linux上实现的为gawk 文本报告生成器（格式化文本）
+
+
+## 正则表达式 Regual Expression REGEXP
+由一一类特殊字符及文本字符所编写的模式，其中有些字符不表示其字面意义 ，而是用于表示控制或通配的功能
+分两类
+- 基本正则表达式 BRE
+- 扩展正则表达式 ERE
+
+元字符：
+
+## grep 
+Grobal search regular expression and print out the line
+作用：文本搜索工具，根据用户指定的“模式（过滤条件）” 对目标文本逐行进行匹配检查，打印匹配到的行
+模式：由正则表达式的元字符及文本字符所编写出的过滤条件
+
+正则表达式引擎：
+- perl pcre
+
+格式：grep [option] pattern [file..]
+
+options
+- --color=auth 对匹配到的文本着色后高亮显示 
+- -i igonrecase 忽略字符的大小写 
+- -o 仅显示匹配的字符串本身
+- -v --invert-match 显示不能被匹配的行
+- -E --extend-regexp 支持扩展的正则表达式
+- -q --quiet 静默，不显示执行结果
+- -A # after 显示后面行
+- -B # before 显示前面行
+- -c # context 显示前后的行
+
+
+基本正则表达式：
+
+贪婪模式
+
+字符匹配
+- . 匹配任意单个字符
+- [] 匹配指定范围内的任意单个字符
+- [^] 匹配指定范围外的任意单个字符
+匹配次数
+- * 匹配其前面字符的任意次 0，1多次
+- .* 任意长度的任意字符
+- \? : 匹配前面字符0次/1次，即其前面的字符是可有可无的
+- \+ 匹配其前面的字符1次或多次; 即其前面的字符要出现至少一次
+- \{m} 匹配其前面的字符m次
+- \{m,n\} 匹配前面的字符至少m次，至少n次
+  - \{0,n\}至多n次
+  - \{m,\}至少m次
+
+
+位置锚定
+- ^: 行首锚定 用于模式的最左侧
+- $：行尾锚定 用于模式的最右侧
+- ^PATTERN$ 用于PATTERN来匹配整行
+  - ^$ 空白行
+  - ^[[:space:]]*$ 空行或包含空白字符的行
+
+
+单词：非特殊字符组成的连续字符（字符串）都称为单词
+- \<或\b 词首锚定 用于单词模式的左侧
+- \>或\b 词尾锚定 用于单词模式的右侧
+- \<PATTERN\> 匹配完整单词
+
+
+分组及引用 
+- \(\) 将一个或多个字符捆绑在一起，当作一个整体进行处理
+  - \(xy\)*ab
+
+> Note: 分组括号中的模式匹配到的内容会被正则表达式引擎自动记录于内部的变量中， 这些变量为：
+> \1: 模式从左侧起，第一个左括号以及与之匹配的右括号之间的模式 所匹配到的字符
+> \2: 模式从左侧起，第二个左括号以及与之匹配的右括号之间的模式 所匹配到的字符
+> eg: grep "\(l..e\).*\1"
+
+## egrep
+
+支持扩展正则表达式 实现类似于grep文本过滤功能  grep -E
+
+格式：egrep [option] pattern [file..]
+options
+- --color=auth 对匹配到的文本着色后高亮显示 
+- -i igonrecase 忽略字符的大小写 
+- -o 仅显示匹配的字符串本身
+- -v --invert-match 显示不能被匹配的行
+- -E --extend-regexp 支持扩展的正则表达式
+- -q --quiet 静默，不显示执行结果
+- -A # after 显示后面行
+- -B # before 显示前面行
+- -c # context 显示前后的行
+
+扩展正则表达式的元字符：
+字符匹配
+- .: 任意单个字符
+- []：指定范围内的字符
+- [^]: 指定范围外的任意单个字符
+次数匹配
+- * 任意单个字符
+- ？ 0次数或1次 其前面的字符可有可元
+- + 其前字符至少1次
+- {m} 其前的字符m次
+- {m, n} 至少m次 至多n次
+位置猫定
+- ^: 行首锚定
+- $：行尾锚定
+- \<或\b 词首锚定
+- \>或\b 词尾锚定
+分组及引用
+- ()分组： 括号内的模式匹配到的字符会被记录于正则表达式引擎的内部变量中
+- 后向引用：\1,\2
+或
+- a|b : a或者b
+
+
+## fgrep 
+不支持正则表达式元字符
+当无需要用到元字符去编写模式时，使用fgrep必能更好
+
+
+## 文本查看及处理工具 wc、cut、sort、uniq、diff、patch
+
+### wc 
+打印文件的行数字节数
+print newline, word, and byte counts for each file
+格式 wc [option] file
+- -l lines
+- -w words
+- -c bytes
+
+### cut
+remove sections from each line of files
+移除文件行的片段
+文本截取工具
+
+格式：cut [option] file
+
+options
+- -d 分隔符 以指定的字符为分隔符
+- -f fields 挑选出的字符
+  - #指定单个字段
+  - #-#连续多个字符
+  - #,#离散的多个字符
+  - 可混合使用
+
+### sort
+排序
+
+格式：sort [option] file
+
+options 
+- -t CHAR 指定分隔符
+- -k # 用户排序比较的字段
+- -n 基于数值大小排序 而非字符
+- -r 逆序排序
+- -f 忽略字符大小写
+- -u 重复的行只保留一份 重复行 连续且相同
+
+
+### uniq
+
+格式 uniq [option] file
+
+options 
+- -c 显示每行的重复次数
+- -u 仅显示未曾重复过的行
+- -d 仅显示重复的行
+
+### diff
+
+比较文件差异 生成补丁
+
+格式 diff [options] file
+
+生成补丁命令：
+diff /ptaht/to/oldfile /path/to/newfile > /path/to/patchfile
+
+options
+- -u 使用unfiled机制，即显示修改行的上下文，默认3行
+
+
+
+### patch
+打补丁
+
+- patch [option] -i patchfile oldfile
+- patch oldfile < patchfil

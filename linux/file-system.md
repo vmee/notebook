@@ -372,6 +372,10 @@ ext系列文件系统的专用工具：
 性能损失 元数据要写两次
 
 ## link 链接文件
+
+符号链接
+权限：lrwxrwxrwx 
+
 硬链接 指向同一个inode的多个文件路径
 特性
 - 目录不支持硬链接
@@ -393,6 +397,8 @@ ln src link_file
 ```sh
 ln -s src link_file
 ```
+
+
 
 ## CentOS 6如何使用xfs文件系统：
 		# yum  -y  install  xfsprogs
@@ -492,7 +498,7 @@ ln -s src link_file
 			umount  device|dir
 			
 			注意：正在被进程访问到的挂载点无法被卸载；
-				查看被哪个或哪些进程所战用：
+				查看被哪个或哪些进程所占用：
 					# lsof  MOUNT_POINT
 					# fuser -v  MOUNT_POINT
 					
@@ -547,3 +553,129 @@ ln -s src link_file
 			du [OPTION]... [FILE]...
 				-s: sumary
 				-h: human-readable
+
+
+## 删除文件
+
+将此文件指向的所有data block标记为未使用状态，将此文件的inode标记为未使用
+
+## 复制与移动文件
+复制：新建文件
+
+移动：
+- 同一文件系统上，改变的仅是其路径 
+- 在不同文件系统，复制数据到目标文件，并删除原文件
+
+符号链接：
+- 权限：lrwxrwxrwx
+- 权限受链接的文件管理
+  
+硬链接
+- 指向同一个inode
+
+## 挂载光盘设备 
+光盘设备文件
+- IDE:/dev/hdc
+- SATA:/dev/sr0
+
+符号链接文件
+- /dev/cdrom
+- /dev/cdrw
+- /dev/dvd
+- /dev/dvdrw
+
+```sh
+mount -r /dev/cdrom /media/cdrom
+unmount /dev/cdrom
+```
+
+## 挂载U盘
+- fdisk
+- mount
+
+## dd命令:convert and copy a file
+用法
+dd if=/PATH/FROM/SRC of=/PATH/TO/DEST
+- bs=# block size 复制单元大小
+- count=# 复制数量
+
+磁盘拷贝
+dd if=/dev/sda of=/dev/sdb
+
+备份MBR
+dd if=/dev/sda of=/tmp/mbr.bak bs=512 count=1
+
+破坏MRB中的boot loader:
+dd if=/dev/zero of=/dev/sda bs=256 count=1
+
+
+## 两个特殊设备
+/dev/null: 数据黑洞
+/dev/zero: 吐零机
+
+
+## 压缩及解压缩工具
+
+压缩比
+压缩目的: 时间换空间 cpu的时间->磁盘空间
+
+- compress/uncompress .z
+- gzip/gunzip .gz
+- bzip2/bunzip2 .bz2
+- xz/unxz .xz
+- zip/unzip 
+- tar
+- cpio
+
+
+### gzip/gunzip/zcap 
+- zcap 展开压缩包
+- -d 解压缩 相当于gunzip
+- -# 指定压缩比 默认6 数字越大压缩比越大(1-9)
+- -c 将压缩结果输出到标准输出
+  - gzip -c FILE > compress.file
+
+### bzip2/bunzip2/bcat
+bzip [option] FILE
+- -d 解压缩 相当于bunzip2
+- -# 指定压缩比 默认6 数字越大压缩比越大(1-9)
+- -k 保留原文件
+
+### xz/unxz/xzcat  lzma/unlzma/lzcat
+
+xz [option]  FILE
+- -d 解压缩
+- -# 指定压缩比,默认是6,数字越大压缩比越大(1-9)
+- -k 保留原文件
+
+### 归档 tar/cpio
+
+tar [options] file
+- -c -f 创建归档
+- -x 展开归档
+- -C 展开到指定目录
+- -t 查看归档的文件列表
+- -cf 创建归档
+- -xf file.tar -C 目录
+- -tf 展开
+
+归档完成后通需要压缩, 给合此前的压缩工具,就实现多个文件了
+
+归档并压缩
+- -z gzip
+  - tar -zct /PATH/TO/FIle.tar.gz FILE...
+  - tar -zxf /PATH/TO/FIle.tar.gz
+- -j: bzip2
+  - tar -jct /PATH/TO/FIle.tar.bz2 FILE...
+  - tar -jxf /PATH/TO/FIle.tar.bz2
+- -J:xz
+  - tar -Jct /PATH/TO/FIle.tar.xz FILE...
+  - tar -Jxf /PATH/TO/FIle.tar.xz
+
+### zip/unzip
+最通用的压缩工具
+压缩比有限
+即能归档又能压缩
+后缀名.zip
+
+
