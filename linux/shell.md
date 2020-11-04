@@ -304,5 +304,62 @@ bash的测试类型
   - 代码片断(循环体)要执行0, 1或多个来回
   
 ### 选择执行
+- && ||
 - if then fi
 - if then else fi
+- case 语句
+
+if语句
+```sh
+if CONDITION; THEN
+fi
+```
+
+
+双分支if语句
+```sh
+if CONDITION; THEN
+else
+fi
+```
+多分支if语句
+```sh
+if CONDITION1; then
+elif CONDITION2; then
+fi
+```
+
+### 循环执行
+将一段代码重复执行0,1或多次
+
+- 进入条件: 条件满足时才进入循环
+- 退出条件: 每个循环都应该有退出条件,以有机会退出循环
+
+base脚本
+- for循环
+- while循环
+- until循环
+
+for循环
+两种格式
+- 遍历列表
+- 控制变量
+
+遍历列表
+```sh
+for VARIALBE in LIST; do
+done
+```
+
+列表生成
+- 直接输出
+- 整数列表 
+  - {start..end}
+  - seq {start [incremtal]} last
+- 返回列表的命令 ls cat ..
+- glob
+- 变量引用 $@, $*
+
+
+
+

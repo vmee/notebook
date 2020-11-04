@@ -1,4 +1,26 @@
-# 网络
+# 网络管理
+
+信号传输通过网线或电磁波
+
+TCP/IP
+
+OSI模式
+- Application Layer
+- Presentation Layer
+- Session Layer
+- Transport Layer
+- Network Layer
+- Data Link Layer
+- Physical Layer
+
+
+TCP/IP模型
+- Application Layer
+- Transport Layer
+- Network Layer
+- Physical Layer
+
+
 ## MAC
 Mac：Media Access Control
 48bits  ICANN:24bits 地址块：24bits

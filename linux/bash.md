@@ -288,7 +288,7 @@ $ command1 || command2 //1为假2则执行 1为真2则不会执行
 
 交互式登录shell进程
 
-直接通过某终端输入账号和密码后登陆打开的shell进程
+直接通过某终端输入账号和密码后登录打开的shell进程
 使用su命令 su - USERNAME 或者使用 su -l USERNAME执行的登录切换
 
 非交互式登录shell进程

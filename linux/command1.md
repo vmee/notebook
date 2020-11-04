@@ -141,7 +141,7 @@ passwd user1   #修改一个用户的口令 (只允许root执行)
 chage -E 2005-12-31 user1    #设置用户口令的失效期限
 pwck     #检查 '/etc/passwd' 的文件格式和语法修正以及存在的用户
 grpck    #检查 '/etc/passwd' 的文件格式和语法修正以及存在的群组
-newgrp group_name     #登陆进一个新的群组以改变新创建文件的预设群组
+newgrp group_name     #登录进一个新的群组以改变新创建文件的预设群组
 
 ```
 ## 文件的权限
