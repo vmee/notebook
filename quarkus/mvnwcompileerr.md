@@ -61,7 +61,7 @@ OS name: "mac os x", version: "10.13.6", arch: "x86_64", family: "mac"
 ```
 我这里是个0字节的文件
 
-> 所以报错是为3.6.4的maven版本未下载成功
+> 所以报错是为3.6.3的maven版本未下载成功
 
 这个地址"https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.3/apache-maven-3.6.3-bin.zip" .
 
