@@ -8,9 +8,12 @@ $ ./mvnw compile quarkus:dev
 
 报以下错误
 
+
+
+
 ```sh
 
-Exception in thread "main" java.util.zip.ZipException: zip END header not found
+Exception in thread "main" java.util.zip.ZipException: zip file is empty
         at java.base/java.util.zip.ZipFile$Source.zerror(ZipFile.java:1585)
         at java.base/java.util.zip.ZipFile$Source.findEND(ZipFile.java:1439)
         at java.base/java.util.zip.ZipFile$Source.initCEN(ZipFile.java:1448)
@@ -57,9 +60,34 @@ OS name: "mac os x", version: "10.13.6", arch: "x86_64", family: "mac"
 
 这里是3.6.1版本, 所以要运行./mvnw 就需要下载3.6.3的版本,那我们看下~/.m2/wrapper/dists/apache-maven-3.6.3-bin/是否有:
 ```
--rw-r--r--  1 kongxiangming  staff     0B Nov 17 10:44 apache-maven-3.6.3-bin.zip.part
+-rw-r--r--  1 xxx  xxx     0B Nov 17 10:44 apache-maven-3.6.3-bin.zip
 ```
 我这里是个0字节的文件
+
+
+但若是下面的情况,下载部分或未下载完成时,就会报"zip END header not found"错误
+
+```
+-rw-r--r--  1 xxx  xxx     0B Nov 17 10:44 apache-maven-3.6.3-bin.zip.part
+```
+```sh
+
+Exception in thread "main" java.util.zip.ZipException: zip END header not found
+        at java.base/java.util.zip.ZipFile$Source.zerror(ZipFile.java:1585)
+        at java.base/java.util.zip.ZipFile$Source.findEND(ZipFile.java:1439)
+        at java.base/java.util.zip.ZipFile$Source.initCEN(ZipFile.java:1448)
+        at java.base/java.util.zip.ZipFile$Source.<init>(ZipFile.java:1249)
+        at java.base/java.util.zip.ZipFile$Source.get(ZipFile.java:1211)
+        at java.base/java.util.zip.ZipFile$CleanableResource.<init>(ZipFile.java:701)
+        at java.base/java.util.zip.ZipFile.<init>(ZipFile.java:240)
+        at java.base/java.util.zip.ZipFile.<init>(ZipFile.java:171)
+        at java.base/java.util.zip.ZipFile.<init>(ZipFile.java:185)
+        at org.apache.maven.wrapper.Installer.unzip(Installer.java:169)
+        at org.apache.maven.wrapper.Installer.createDist(Installer.java:86)
+        at org.apache.maven.wrapper.WrapperExecutor.execute(WrapperExecutor.java:121)
+        at org.apache.maven.wrapper.MavenWrapperMain.main(MavenWrapperMain.java:61)
+
+```
 
 > 所以报错是为3.6.3的maven版本未下载成功
 
