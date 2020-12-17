@@ -62,7 +62,8 @@ mvn clean package
 - mvn clean compile：先清理，再执行到compile；
 - mvn clean test：先清理，再执行到test，因为执行test前必须执行compile，所以这里不必指定compile；
 - mvn clean package：先清理，再执行到package
-
+- mvn clean package -Dmaven.test.skip=true
+- 
 Goal
 
 执行一个phase又会触发一个或多个goal

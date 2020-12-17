@@ -93,4 +93,7 @@ Exception in thread "main" java.util.zip.ZipException: zip END header not found
 
 这个地址"https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.3/apache-maven-3.6.3-bin.zip" .
 
-所以你可以更换国内镜像包试试.
+你可以:
+1. 删除maven对应版本重新下载
+2. 更换国内镜像
+3. 翻出去

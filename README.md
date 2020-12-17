@@ -3,6 +3,7 @@
 ## Getting Super Powers
 
 [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines/blob/master/README.zh-CN.md)
+[中文技术文档的写作规范](https://github.com/ruanyf/document-style-guide)
 
 Becoming a super hero is a fairly straight forward process:
 
