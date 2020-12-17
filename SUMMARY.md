@@ -29,6 +29,7 @@
     * [Alfred4](mac/alfred4.md)
     * [开机启动项管理](mac/startup.md)
     * [升级macOS Big Sur11.1后蓝牙不能用](mac/macos-big-sur11.1-bluetooth.md)
+    * [macOs磁盘清理之Homebrew数据清理](mac/macos-homebrew-clean.md)
 * [Docker](docker/docker.md)
     * [常用命令](docker/common.md)
     * [Dockerfile](docker/dockerfile-doc.md)
